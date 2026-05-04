@@ -48,7 +48,7 @@ const gallerySections = [
   },
   {
     title: 'Conclave 2025',
-    items: [1, 2, 3, 4, 5, 6, 7, 8, 10, 11].map((photoNumber, index) => ({
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((photoNumber, index) => ({
       id: `conclave-2025-${photoNumber}`,
       src: `/images-optimized/gallery/conclave-2025/conclave-2025-${String(photoNumber).padStart(2, '0')}.jpg`,
       title: `Conclave 2025 photo ${index + 1}`,
@@ -80,7 +80,7 @@ const gallerySections = [
   },
   {
     title: 'Conclave 2024',
-    items: Array.from({ length: 8 }, (_, index) => {
+    items: Array.from({ length: 9 }, (_, index) => {
       const photoNumber = String(index + 1).padStart(2, '0');
 
       return {
@@ -92,7 +92,7 @@ const gallerySections = [
   },
   {
     title: 'V-Sitare 1',
-    items: Array.from({ length: 4 }, (_, index) => {
+    items: Array.from({ length: 5 }, (_, index) => {
       const photoNumber = String(index + 1).padStart(2, '0');
 
       return {
@@ -104,7 +104,7 @@ const gallerySections = [
   },
   {
     title: 'Conclave 2023',
-    items: Array.from({ length: 10 }, (_, index) => {
+    items: Array.from({ length: 11 }, (_, index) => {
       const photoNumber = String(index + 1).padStart(2, '0');
 
       return {
@@ -115,6 +115,26 @@ const gallerySections = [
     }),
   },
 ];
+
+const getGalleryItemSpan = (index: number) => {
+  const pattern = [2, 3];
+  let remainingIndex = index;
+  let rowIndex = 0;
+
+  while (remainingIndex >= pattern[rowIndex % pattern.length]) {
+    remainingIndex -= pattern[rowIndex % pattern.length];
+    rowIndex += 1;
+  }
+
+  return pattern[rowIndex % pattern.length] === 2 ? 'md:col-span-3' : 'md:col-span-2';
+};
+
+const galleryItems = gallerySections.flatMap((section) =>
+  section.items.map((item) => ({
+    ...item,
+    sectionTitle: section.title,
+  }))
+);
 
 export default function CompleteGalleryPage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -153,43 +173,41 @@ export default function CompleteGalleryPage() {
         </div>
       </section>
 
-      <section className="py-16 max-w-[1550px] mx-auto px-6 space-y-16">
-        {gallerySections.map((section) => (
-          <div key={section.title}>
-            <h2 className="mb-6 text-3xl font-black tracking-tight text-[#002147]">{section.title}</h2>
-            <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <AnimatePresence mode='popLayout'>
-                {section.items.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    whileHover={{ y: -8 }}
-                    className="group relative aspect-[14/9] overflow-hidden rounded-[1.5rem] border-[6px] border-white bg-white shadow-md cursor-pointer"
-                    onClick={() => setSelectedImage(item.src)}
-                  >
-                    <Image
-                      src={item.src}
-                      alt={item.title}
-                      fill
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                    />
+      <section className="py-16 max-w-[1550px] mx-auto px-6">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-6 gap-5">
+          <AnimatePresence mode='popLayout'>
+            {galleryItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -8 }}
+                className={`group relative aspect-[14/9] overflow-hidden rounded-[1.5rem] border-[6px] border-white bg-white shadow-md cursor-pointer ${getGalleryItemSpan(index)}`}
+                onClick={() => setSelectedImage(item.src)}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.title}
+                  fill
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#002147]/70 via-[#002147]/15 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-start p-8">
-                      <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md text-white transition-all duration-300 flex items-center justify-center group-hover:bg-orange-500">
-                        <FontAwesomeIcon icon={faExpandAlt} className="text-sm" />
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          </div>
-        ))}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#002147]/85 via-[#002147]/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-between gap-4 p-6 md:p-8">
+                  <h2 className="max-w-[calc(100%-4rem)] text-xl md:text-2xl font-black tracking-tight text-white">
+                    {item.sectionTitle}
+                  </h2>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/20 text-white backdrop-blur-md transition-all duration-300 group-hover:bg-orange-500">
+                    <FontAwesomeIcon icon={faExpandAlt} className="text-sm" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </section>
 
 
