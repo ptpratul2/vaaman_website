@@ -1,4 +1,3 @@
-// app/api/approve-referral/route.ts
 import { NextResponse } from "next/server";
 import { getApiBaseUrl, getEnvValue } from "@/lib/frappe";
 
