@@ -153,7 +153,7 @@ export default function CompleteGalleryPage() {
         </div>
       </section>
 
-      {/* <section className="py-16 max-w-[1550px] mx-auto px-6 space-y-16">
+      <section className="py-16 max-w-[1550px] mx-auto px-6 space-y-16">
         {gallerySections.map((section) => (
           <div key={section.title}>
             <h2 className="mb-6 text-3xl font-black tracking-tight text-[#002147]">{section.title}</h2>
@@ -217,7 +217,7 @@ export default function CompleteGalleryPage() {
             <button className="absolute top-10 right-10 text-white text-5xl font-thin hover:text-orange-500 transition-all">×</button>
           </motion.div>
         )}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </div>
   );
 }
