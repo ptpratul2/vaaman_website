@@ -9,7 +9,7 @@ import { faExpandAlt } from '@fortawesome/free-solid-svg-icons';
 const gallerySections = [
   {
     title: 'Campus Recruitment Drive 2026',
-    items: Array.from({ length: 14 }, (_, index) => {
+    items: Array.from({ length: 13 }, (_, index) => {
       const photoNumber = String(index + 1).padStart(2, '0');
 
       return {
@@ -32,20 +32,28 @@ const gallerySections = [
     }),
   },
   {
-    title: 'Pantnagar Visit & Business Meet',
+    title: 'Pantnagar Visit',
     items: [
       {
         id: 'pantnagar-visit',
         src: '/images-optimized/gallery/pantnagar-business-meet/pantnagar-visit.jpg',
         title: 'Pantnagar Visit',
       },
-      {
+      
+    ],
+  },
+  {
+    title: 'Business Meet',
+    items: [
+  {
         id: 'business-meet',
         src: '/images-optimized/gallery/pantnagar-business-meet/business-meet.jpg',
         title: 'Business Meet',
-      },
+  },
+      
     ],
   },
+
   {
     title: 'Conclave 2025',
     items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((photoNumber, index) => ({
