@@ -76,7 +76,7 @@ const gallerySections = [
   },
   {
     title: 'Campus Recruitment Drive 2025',
-    items: Array.from({ length: 6 }, (_, index) => {
+    items: Array.from({ length: 7 }, (_, index) => {
       const photoNumber = String(index + 1).padStart(2, '0');
 
       return {
