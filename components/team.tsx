@@ -53,7 +53,7 @@ const teamMembers = [
     role: "Sector Head (Aluminium)",
     delay: 0.7,
     img: "/images-optimized/award/bharat.jpeg",
-    linkedin: "#"
+    linkedin: "https://www.linkedin.com/in/nabharath?utm_source=share_via&utm_content=profile&utm_medium=member_android"
   },
   { 
     id: 6, 
@@ -61,7 +61,7 @@ const teamMembers = [
     role: "Corporate HR Head", 
     delay: 0.5, 
     img: "/images-optimized/award/vineeta.jpeg", 
-    linkedin: "https://www.linkedin.com/in/barun-kumar-maji-517223225/" 
+    linkedin: "https://www.linkedin.com/in/vineeta-joshi-93142017" 
   },
 ];
 
